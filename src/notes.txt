@@ -1,0 +1,85 @@
+Redirection
+-----------
+
+1. Create a file 'Singleview.js' in pages folder
+2. Install a library 'react-router-dom' - npm i react-router-dom
+                             components - Route, Routes, BrowserRouter
+3. Attach <BrowserRouter></BrowserRouter> in index.js after that we can able to do routing in <App/>
+
+4. Attach components into <Routes></Routes> in App.js that we want to apply routing / redirection
+   In this routing components are Productlist.js & Singleview.js
+
+5. Then we set path, If we have one or more components we use <Route></Route> for setting path
+   eg:- <Route path='/' element={<Productlist></Productlist>}></Route>  // Landing page that give empty path in will open in localhost3000/
+        <Route path='/single-view' element={<Singleview></Singleview>}></Route>  // redirecting page
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Make card as link by using <Link></Link> that means attach the card inside the link that will make the card as link model
+7. Add the path of which page will make redirection inside the 'to={}'
+   eg:- to={'/single-view'}
+-----------------------------------------------------------------------------------------------------------------------------
+
+8. Sending id with the path in redirecting page when clicking a card 
+   eg:- /single-view/id
+   for that we add a urlparam (:) - urlparams means sharing a data with path
+   eg:- '/single-view/:id'
+9. Call id with the path using '{}' in the 'to={}' variable that add in the link in Productlist.js and will appear in string so that, we use back pick " `` " and use ${}
+   eg:- to={`/single-view/${i.id}`}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ACCESS urlparams
+----------------
+
+>>> Hook is used to access urlparams - useParams()
+
+10. Import useParams in Singleview.js
+11. Create a object and call useParams
+    eg:- const params=useParams()
+     Then console.log(params.id);
+
+For calling API
+---------------
+
+12. Create a arrow function
+    eg:- const singleData=async()=>{
+         const result=await axios.get(`https://dummyjson.com/recipes/${params.id}`)
+         console.log(result.data);
+         useEffect(()=>{
+            singleData()
+            },[])
+    }
+
+13. Create state -useState
+    eg:-   const [ingredients,setIngredients]=useState({})
+    add this setIngredients(result.data);
+    then console after useEffect()
+
+14. display the data in Singleview.js design html inside the return 
+
+
+
+<div>
+          <ListGroup as="ol" numbered>
+              <ListGroup.Item as="li">{ingredients.ingredients[0]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[1]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[2]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[3]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[4]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[5]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[6]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[7]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[8]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[9]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[10]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.ingredients[11]}</ListGroup.Item>
+            </ListGroup>
+            <ListGroup as="ol" numbered>
+              <ListGroup.Item as="li">{ingredients.instructions[0]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.instructions[1]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.instructions[2]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.instructions[3]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.instructions[4]}</ListGroup.Item>
+              <ListGroup.Item as="li">{ingredients.instructions[5]}</ListGroup.Item>
+            </ListGroup>
+
+          </div>
